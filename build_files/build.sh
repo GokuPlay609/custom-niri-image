@@ -53,6 +53,19 @@ dnf5 install -y --skip-unavailable \
     stow
 
 ###############################################################################
+# 2a. Disable Terra repo
+###############################################################################
+# bootc-image-builder depsolves the image's enabled repos when generating
+# anaconda-iso/qcow2 disks. The terra .repo file references a GPG key path
+# that isn't shipped, which breaks BIB. We only needed terra during the
+# container build for noctalia-shell, so disable it now.
+
+for f in /etc/yum.repos.d/terra*.repo; do
+    [[ -f "$f" ]] || continue
+    sed -i 's/^enabled=1/enabled=0/g' "$f"
+done
+
+###############################################################################
 # 2b. CaskaydiaCove Nerd Font
 ###############################################################################
 # Pulled directly from the upstream Nerd Fonts release because Fedora does not

@@ -35,6 +35,7 @@ dnf5 install -y --skip-unavailable \
     niri \
     xwayland-satellite \
     noctalia-shell \
+    ghostty \
     brightnessctl \
     ddcutil \
     cliphist \
@@ -54,6 +55,21 @@ dnf5 install -y --skip-unavailable \
     stow
 
 ###############################################################################
+# 2b. CaskaydiaCove Nerd Font
+###############################################################################
+# Pulled directly from the upstream Nerd Fonts release because Fedora does not
+# ship a CaskaydiaCove rpm. Pinned to a stable tag and installed system-wide.
+
+NF_VERSION="v3.4.0"
+NF_TMP="$(mktemp -d)"
+curl -fsSL -o "$NF_TMP/CascadiaCode.zip" \
+    "https://github.com/ryanoasis/nerd-fonts/releases/download/${NF_VERSION}/CascadiaCode.zip"
+install -d -m 0755 /usr/share/fonts/CaskaydiaCoveNF
+( cd "$NF_TMP" && unzip -qo CascadiaCode.zip 'CaskaydiaCove*.ttf' -d /usr/share/fonts/CaskaydiaCoveNF )
+fc-cache -f /usr/share/fonts/CaskaydiaCoveNF
+rm -rf "$NF_TMP"
+
+###############################################################################
 # 3. Default user dotfiles -> /etc/skel
 ###############################################################################
 # Anaconda copies /etc/skel into every newly-created user's $HOME. Stow-style
@@ -67,6 +83,9 @@ cp -a /dotfiles/niri/.config/niri /etc/skel/.config/niri
 
 # noctalia config (settings.json, colors.json, plugins/)
 cp -a /dotfiles/noctalia/.config/noctalia /etc/skel/.config/noctalia
+
+# ghostty config + themes
+cp -a /dotfiles/ghostty/.config/ghostty /etc/skel/.config/ghostty
 
 ###############################################################################
 # 4. System units

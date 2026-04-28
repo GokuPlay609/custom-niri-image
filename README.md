@@ -13,6 +13,8 @@ Built daily and signed via [cosign](https://docs.sigstore.dev/cosign/overview/).
 | Base | `ghcr.io/ublue-os/bluefin:stable` |
 | Compositor | [niri](https://github.com/YaLTeR/niri) |
 | Shell | [noctalia-shell](https://docs.noctalia.dev) (Quickshell-based) |
+| Terminal | [ghostty](https://ghostty.org) |
+| Font | CaskaydiaCove Nerd Font (v3.4.0, baked into `/usr/share/fonts`) |
 
 ## Layout
 
@@ -22,7 +24,8 @@ Built daily and signed via [cosign](https://docs.sigstore.dev/cosign/overview/).
 ├── build_files/build.sh        # installs niri, noctalia, deps, dotfiles
 ├── dotfiles/                   # copied verbatim into /etc/skel
 │   ├── niri/.config/niri/...
-│   └── noctalia/.config/noctalia/...
+│   ├── noctalia/.config/noctalia/...
+│   └── ghostty/.config/ghostty/...
 ├── disk_config/                # bootc-image-builder configs (qcow2 / ISO)
 ├── .github/workflows/
 │   ├── build.yml               # daily build + sign + push to GHCR
@@ -70,6 +73,7 @@ time. To pull in latest changes from `~/dotfiles`:
 ```sh
 rsync -a --delete ~/dotfiles/niri/     ./dotfiles/niri/
 rsync -a --delete ~/dotfiles/noctalia/ ./dotfiles/noctalia/
+rsync -a --delete ~/dotfiles/ghostty/  ./dotfiles/ghostty/
 git add dotfiles && git commit -m "dotfiles: sync"
 git push
 ```

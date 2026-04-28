@@ -2,6 +2,7 @@
 FROM scratch AS ctx
 COPY build_files /
 COPY dotfiles /dotfiles
+# (After the bind mount in the next stage, build.sh sees these at /ctx/dotfiles)
 
 # Base image: Bluefin (GNOME-based ublue image, actively maintained, ships
 # gdm + pipewire + xdg portals + NetworkManager out of the box). niri is

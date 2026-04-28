@@ -78,14 +78,17 @@ rm -rf "$NF_TMP"
 
 install -d -m 0755 /etc/skel/.config
 
+# Dotfiles live at /ctx/dotfiles (mounted via the build's bind mount from the
+# scratch ctx stage in the Containerfile).
+
 # niri config (kdl includes -> ./cfg/, ./animations/, noctalia.kdl)
-cp -a /dotfiles/niri/.config/niri /etc/skel/.config/niri
+cp -a /ctx/dotfiles/niri/.config/niri /etc/skel/.config/niri
 
 # noctalia config (settings.json, colors.json, plugins/)
-cp -a /dotfiles/noctalia/.config/noctalia /etc/skel/.config/noctalia
+cp -a /ctx/dotfiles/noctalia/.config/noctalia /etc/skel/.config/noctalia
 
 # ghostty config + themes
-cp -a /dotfiles/ghostty/.config/ghostty /etc/skel/.config/ghostty
+cp -a /ctx/dotfiles/ghostty/.config/ghostty /etc/skel/.config/ghostty
 
 ###############################################################################
 # 4. System units

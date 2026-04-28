@@ -31,6 +31,9 @@ dnf5 install -y --nogpgcheck \
 #     provides the same ppd-service dbus interface (they conflict).
 #   - polkit-gnome is omitted (the noctalia polkit-agent plugin in dotfiles
 #     handles auth prompts inside niri sessions).
+#   - mako/foot/fuzzel/swaylock/swayidle are omitted because noctalia-shell
+#     subsumes them (notifications, launcher, lockscreen, idle) and ghostty
+#     replaces foot.
 dnf5 install -y --skip-unavailable \
     niri \
     xwayland-satellite \
@@ -43,11 +46,6 @@ dnf5 install -y --skip-unavailable \
     grim \
     slurp \
     wl-clipboard \
-    swayidle \
-    swaylock \
-    mako \
-    foot \
-    fuzzel \
     fontawesome-fonts-all \
     google-noto-emoji-fonts \
     google-noto-sans-fonts \

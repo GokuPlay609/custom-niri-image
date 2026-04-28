@@ -21,30 +21,24 @@ dnf5 install -y --nogpgcheck \
 # niri (compositor) + noctalia-shell (Quickshell-based replacement for
 # waybar/walker) + the runtime/optional deps documented in the noctalia docs
 # and a usable baseline of CLI/Wayland tooling.
-dnf5 install -y \
+# Bluefin already provides pipewire, NetworkManager, polkit, xdg-desktop-portal*,
+# upower, bluez, ImageMagick, python3, git, etc. The list below intentionally
+# only adds what's missing or compositor-specific. We use --skip-unavailable so
+# the build keeps going if Fedora renames/drops a package upstream.
+#
+# Notes:
+#   - power-profiles-daemon is omitted because Bluefin ships tuned-ppd which
+#     provides the same ppd-service dbus interface (they conflict).
+#   - polkit-gnome is omitted (the noctalia polkit-agent plugin in dotfiles
+#     handles auth prompts inside niri sessions).
+dnf5 install -y --skip-unavailable \
     niri \
     xwayland-satellite \
     noctalia-shell \
     brightnessctl \
-    ImageMagick \
-    python3 \
-    git \
     ddcutil \
-    power-profiles-daemon \
-    NetworkManager \
-    upower \
-    bluez \
     cliphist \
     wlsunset \
-    xdg-desktop-portal \
-    xdg-desktop-portal-gnome \
-    xdg-desktop-portal-gtk \
-    evolution-data-server \
-    pipewire \
-    wireplumber \
-    pipewire-pulseaudio \
-    polkit \
-    polkit-gnome \
     grim \
     slurp \
     wl-clipboard \
@@ -53,7 +47,6 @@ dnf5 install -y \
     mako \
     foot \
     fuzzel \
-    libnotify \
     fontawesome-fonts-all \
     google-noto-emoji-fonts \
     google-noto-sans-fonts \
@@ -78,8 +71,5 @@ cp -a /dotfiles/noctalia/.config/noctalia /etc/skel/.config/noctalia
 ###############################################################################
 # 4. System units
 ###############################################################################
-
-# These should already be enabled in sericea-main but we ensure idempotently.
-systemctl enable NetworkManager.service
-systemctl enable bluetooth.service
-systemctl enable power-profiles-daemon.service
+# Bluefin already enables NetworkManager, bluetooth, and tuned-ppd. Nothing
+# extra to enable here.

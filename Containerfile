@@ -3,10 +3,10 @@ FROM scratch AS ctx
 COPY build_files /
 COPY dotfiles /dotfiles
 
-# Base image: ublue sericea-main is the closest match for niri (Wayland tiling
-# compositor stack with greetd/tuigreet, pipewire, xdg-portals, NetworkManager,
-# etc., already configured) without the bloat of GNOME/KDE.
-FROM ghcr.io/ublue-os/sericea-main:stable
+# Base image: Bluefin (GNOME-based ublue image, actively maintained, ships
+# gdm + pipewire + xdg portals + NetworkManager out of the box). niri is
+# installed alongside and will appear as an additional Wayland session in gdm.
+FROM ghcr.io/ublue-os/bluefin:stable
 
 ### MODIFICATIONS
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \

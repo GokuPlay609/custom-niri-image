@@ -10,7 +10,7 @@ Built daily and signed via [cosign](https://docs.sigstore.dev/cosign/overview/).
 | | |
 |---|---|
 | Image | `ghcr.io/gokuplay609/custom-niri-image:latest` |
-| Base | `ghcr.io/ublue-os/sericea-main:stable` |
+| Base | `ghcr.io/ublue-os/bluefin:stable` |
 | Compositor | [niri](https://github.com/YaLTeR/niri) |
 | Shell | [noctalia-shell](https://docs.noctalia.dev) (Quickshell-based) |
 
@@ -18,7 +18,7 @@ Built daily and signed via [cosign](https://docs.sigstore.dev/cosign/overview/).
 
 ```
 .
-├── Containerfile               # FROM sericea-main:stable + run build.sh
+├── Containerfile               # FROM bluefin:stable + run build.sh
 ├── build_files/build.sh        # installs niri, noctalia, deps, dotfiles
 ├── dotfiles/                   # copied verbatim into /etc/skel
 │   ├── niri/.config/niri/...

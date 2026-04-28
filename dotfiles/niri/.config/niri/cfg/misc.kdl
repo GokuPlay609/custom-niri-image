@@ -1,0 +1,30 @@
+    prefer-no-csd
+    screenshot-path null
+
+    environment {
+        ELECTRON_OZONE_PLATFORM_HINT "auto"
+        QT_QPA_PLATFORM "wayland"
+        QT_QPA_PLATFORMTHEME "qt6ct"
+        QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+        XDG_CURRENT_DESKTOP "niri"
+        XDG_SESSION_TYPE "wayland"
+    }
+
+    cursor {
+        xcursor-theme "macOS"
+        xcursor-size 28
+    }
+
+    debug {
+        // Allows notification actions and window activation from Noctalia.
+        honor-xdg-activation-with-invalid-serial
+    }
+
+    hotkey-overlay {
+       skip-at-startup
+    }
+
+    blur {
+        passes 1     // fewer passes = lighter blur (default: 3)
+        offset 2.0   // sample distance per pass (default: 3.0)
+    }
